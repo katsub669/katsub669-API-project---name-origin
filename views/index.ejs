@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Origin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+
+<body>
+<!--form field to get the user's name-->
+    <form action="/nationality" method="POST">
+        <input class="form-control outline" type="text" name="fName" placeholder="First name">
+        <input class="form-control btn btn-primary" type="submit" value="OK">
+      </form>
+
+<!-- displaying the response -->
+    <% if(locals.content) {%>
+        <ul class="list-group">
+<!--checking if any data was entered > showing response in form of the list of possible nationalities if the form was submitted -->
+            <% if (content.length !=0) {
+                for (let i = 0; i < content.length; i++) {%>
+            <li class="list-group-item"> Origin: <span class="highlight"><%= content[i][0] %></span> with probability of <span class="highlight"><%= Math.floor(content[i][1] * 1000) / 10 %>%</span> </li>
+            <% }} else {%>
+        </ul>
+<!-- showing error msg if the submitted form contained data not suitable for the API -->
+        <h1>Sorry, we couldn't find your name in our list <icons>😔</icons></h1>
+      <% } %>
+<!-- shows if the form was not submitted or submitted with no data-->
+      <% } else {%>
+        <h1>Enter Your Name Above <icons> ☝️</icons></h1>
+      <% } %>
+    
+
+
+</body>
+</html>
